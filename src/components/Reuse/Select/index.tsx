@@ -1,18 +1,26 @@
-import { FieldSetForm } from "./styles";
-import { SelectForm } from "./styles";
+
+import { SelectForm ,SelectContainer,FieldSetForm} from "./styles";
+import { ErrorMessage } from "../ErrorMessage";
 
 type SelectProps = React.ComponentProps<"select"> & {
   legend?: string;
+  error?: string;
 };
-export function Select({ legend, children, ...rest }: SelectProps) {
+export function Select({ error, legend, children, ...rest }: SelectProps) {
   return (
-    <FieldSetForm>
-      <legend>{legend}</legend>
+    <SelectContainer>
+      <FieldSetForm error={error}>
+        <legend>{legend}</legend>
 
-      <SelectForm {...rest}>
-       <option>Selecione</option>
-        {children}
-      </SelectForm>
-    </FieldSetForm>
+        <SelectForm {...rest}>
+          <option value="" disabled selected>
+            Selecione
+          </option>
+          {children}
+        </SelectForm>
+       
+      </FieldSetForm>
+       {error && <ErrorMessage message={error} />}
+    </SelectContainer>
   );
 }

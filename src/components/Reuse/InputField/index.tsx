@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes } from "react";
-import { IconError, InputContainer, InputContent, InputError } from "./styles";
+import { InputContainer, InputContent  } from "./styles";
+import { ErrorMessage } from "../ErrorMessage";
 
-import InputIconError from "../../../assets/alert-circle.svg";
 
 interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   children: React.ReactNode;
@@ -14,12 +14,7 @@ export function InputField({ error, children, ...props }: InputFieldProps) {
       <InputContent>
         <input {...props} />
 
-        {error && (
-          <InputError>
-            <IconError src={InputIconError} />
-            <p>{error}</p>
-          </InputError>
-        )}
+        {error &&<ErrorMessage message={error}/>}
       </InputContent>
     </InputContainer>
   );
