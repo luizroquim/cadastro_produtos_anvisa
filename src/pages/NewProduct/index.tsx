@@ -35,9 +35,9 @@ export function NewProduct() {
               error={"Número do registro é obrigatório"}
             >
               Número do Registro da Anvisa:
-            </InputField>
+            </InputField >
 
-            <Select required legend="Classe de Risco">
+            <Select required legend="Classe de Risco" error="Classe de risco obrigatória">
               <option value="Classe I - Baixo Risco">
                 Classe I - Baixo Risco
               </option>
@@ -49,7 +49,7 @@ export function NewProduct() {
               </option>
             </Select>
 
-            <Select required legend="Status de Regularidade">
+            <Select required legend="Status de Regularidade" >
               <option value="Vigente">
                 Vigente
               </option>
