@@ -4,8 +4,10 @@ import { Container } from "./styles";
 import { Content } from "./styles";
 import { Form, FormData } from "./styles";
 import { Select } from "../../components/Reuse/Select";
+import { useState } from "react";
 
 export function NewProduct() {
+  const [status, SetStatus] = useState("");
   return (
     <Container>
       <Content>
@@ -16,28 +18,19 @@ export function NewProduct() {
 
         <Form>
           <FormData>
-            <InputField
-              placeholder="Ex: Luva descartável estéril"
-              
-            >
+            <InputField placeholder="Ex: Luva descartável estéril">
               Nome do Produto:
             </InputField>
 
-            <InputField
-              placeholder="Ex: Luvas Descartáveis"
-              error={"Nome técnico do produto é obrigatório"}
-            >
+            <InputField placeholder="Ex: Luvas descartáveis">
               Nome Técnico do Produto:
             </InputField>
 
-            <InputField
-              placeholder="Ex:10330660003"
-              error={"Número do registro é obrigatório"}
-            >
+            <InputField placeholder="Ex:10330660003">
               Número do Registro da Anvisa:
-            </InputField >
+            </InputField>
 
-            <Select required legend="Classe de Risco" error="Classe de risco obrigatória">
+            <Select required legend="Classe de Risco">
               <option value="Classe I - Baixo Risco">
                 Classe I - Baixo Risco
               </option>
@@ -49,19 +42,19 @@ export function NewProduct() {
               </option>
             </Select>
 
-            <Select required legend="Status de Regularidade" >
-              <option value="Vigente">
-                Vigente
-              </option>
-              <option value="Vencido">
-                Vencido
-              </option>
-              <option value="Em revalidação">
-                Em revalidação
-              </option>
+            <Select
+              required
+              legend="Status de Regularidade"
+              onChange={(e) => SetStatus(e.target.value)}
+            >
+              <option value="Vigente">Vigente</option>
+              <option value="Vencido">Vencido</option>
+              <option value="Em revalidação">Em revalidação</option>
+              <option value="Outro">Outro</option>
             </Select>
-
-
+            {status === "Outro" && (
+              <InputField type="date">Data de vencimento:</InputField>
+            )}
           </FormData>
         </Form>
       </Content>
