@@ -5,6 +5,7 @@ import { Content } from "./styles";
 import { Form, FormData } from "./styles";
 import { Select } from "../../components/Reuse/Select";
 import { useState } from "react";
+import { Button } from "../../components/Reuse/Button";
 
 export function NewProduct() {
   const [status, SetStatus] = useState("");
@@ -30,7 +31,7 @@ export function NewProduct() {
               Número do Registro da Anvisa:
             </InputField>
 
-            <Select required legend="Classe de Risco">
+            <Select required legend="Classe de Risco" error="Classe de risco é obrigatória">
               <option value="Classe I - Baixo Risco">
                 Classe I - Baixo Risco
               </option>
@@ -55,7 +56,12 @@ export function NewProduct() {
             {status === "Outro" && (
               <InputField type="date">Data de vencimento:</InputField>
             )}
+
+            <Button buttonColor="primary" variant="base" isLoading={false}>Cadastrar</Button>
+            <Button buttonColor="cancel"variant="base" isLoading={false}>Cancelar</Button>
+            
           </FormData>
+          
         </Form>
       </Content>
     </Container>

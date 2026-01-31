@@ -4,9 +4,11 @@ export const Container = styled.main`
   display: flex;
   justify-content: center;
   align-items:center;
+  
   width:100vw;
-  height:100vh;
+  min-height:100vh;
   background-color: ${({ theme }) => theme.colors.gray_400  };
+  padding:20px;
   
   
 `;
@@ -15,7 +17,8 @@ export const Content = styled.div`
 display:flex;
 flex-direction:column;
  background-color: ${({ theme }) => theme.colors.gray_500};
- width:700px;
+ width:100%;
+ max-width:700px;
  height:auto;
  border-radius:8px;
  box-shadow:-15px 0 20px -10px rgba(0, 0, 0, 0.15), 15px 0 20px -10px rgba(0, 0, 0, 0.15);
@@ -25,6 +28,7 @@ flex-direction:column;
 `;
 
 export const Form = styled.form`
+width:100%;
 display:flex;
 flex-direction:column;
 gap:8px;
