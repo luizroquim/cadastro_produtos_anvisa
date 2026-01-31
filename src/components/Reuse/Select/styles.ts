@@ -15,7 +15,7 @@ export const FieldSetForm = styled.fieldset<FieldSetFormProps>`
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.background};
   border-radius: 8px;
-  font: ${({ theme }) => theme.font.openSans.small_400};
+  font: ${({ theme }) => theme.font.openSans.small_600};
   color: ${({ theme }) => theme.colors.gray_800};
   padding: 8px 14px;
   border: 1px solid

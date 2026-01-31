@@ -5,11 +5,12 @@ interface InputContainerProps {
 }
 
 export const InputContainer = styled.div<InputContainerProps>`
+
   display: flex;
   flex-direction: column;
   gap: 8px;
   label {
-    font: ${({ theme }) => theme.font.openSans.small_400};
+    font: ${({ theme }) => theme.font.openSans.small_600};
   }
   input {
     padding: 12px 14px;
