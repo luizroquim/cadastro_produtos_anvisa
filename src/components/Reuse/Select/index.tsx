@@ -13,7 +13,7 @@ export function Select({ error, legend, children, ...rest }: SelectProps) {
         <legend>{legend}</legend>
 
         <SelectForm {...rest}>
-          <option value="" disabled selected>
+          <option value="" disabled>
             Selecione
           </option>
           {children}
