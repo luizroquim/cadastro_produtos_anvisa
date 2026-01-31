@@ -11,6 +11,7 @@ export const InputContainer = styled.div<InputContainerProps>`
   gap: 8px;
   label {
     font: ${({ theme }) => theme.font.openSans.small_600};
+    color: ${({ theme,error }) => error ? theme.colors.semantic_error: theme.colors.gray_800};
   }
   input {
     padding: 12px 14px;
@@ -26,10 +27,7 @@ export const InputContainer = styled.div<InputContainerProps>`
       outline: none;
       border: 1px solid
         ${({ theme, error }) =>
-          error ? theme.colors.semantic_error : theme.colors.green_200};
-
-      box-shadow: ${({ error }) =>
-        error ? "0 0 10px 1px rgba(53, 43, 43, 0.1)" : "none"};
+          error ? theme.colors.semantic_error : theme.colors.green_200}; 
     }
   }
 `;

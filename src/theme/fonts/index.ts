@@ -16,6 +16,11 @@ export const openSansFont = {
   big_600: "600 24px/1.5 'Open Sans', sans-serif",
   big_700: "700 24px/1.5 'Open Sans', sans-serif",
 
+
+  //26px
+   x_big_700: "700 26px/1.5 'Open Sans', sans-serif",
+
+  //40px
   giant_400: "400 40px/1.25 'Open Sans', sans-serif",
   giant_600: "600 40px/1.25 'Open Sans', sans-serif",
   giant_700: "700 40px/1.25 'Open Sans', sans-serif",
