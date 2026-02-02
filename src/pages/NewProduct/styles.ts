@@ -8,7 +8,7 @@ export const Container = styled.main`
   
   width:100vw;
   min-height:100vh;
-  background-color: ${({ theme }) => theme.colors.gray_400  };
+  background-color: ${({ theme }) => theme.colors.gray_400};
   padding:20px;
   
   
