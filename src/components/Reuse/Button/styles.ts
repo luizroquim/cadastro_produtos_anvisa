@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 type ContainerProps = {
-  $buttonColor: "primary" | "cancel";
+  $buttonColor: "primary" | "outline";
   $variant: "base" | "icon" | "iconSmall";
   $isLoading?: boolean;
 };
@@ -28,9 +28,9 @@ const variantColor = {
       background-color: ${({ theme }) => theme.colors.green_200};
     }
   `,
-  cancel: css`
+  outline: css`
     background-color: ${({ theme }) => theme.colors.gray_500};
-    border:1px solid ${({theme})=>theme.colors.gray_300};
+    border: 1px solid ${({ theme }) => theme.colors.gray_300};
     &:hover {
       background-color: ${({ theme }) => theme.colors.gray_400};
     }
@@ -41,12 +41,17 @@ export const ButtonContainer = styled.button<ContainerProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  font:${({theme})=>theme.font.openSans.small_600};
+  font: ${({ theme }) => theme.font.openSans.small_600};
   border-radius: 8px;
-
+  gap:8px;
   border: none;
   cursor: pointer;
+  white-space:nowrap;
+  padding:24px;
   transition: all 0.2s linear;
+
+ 
+ 
 
   &:disabled {
     opacity: 0.5;
@@ -59,6 +64,7 @@ export const ButtonContainer = styled.button<ContainerProps>`
     $isLoading &&
     css`
       cursor: progress;
-      
     `}
+
+ 
 `;
