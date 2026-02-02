@@ -166,9 +166,10 @@ export function NewProduct() {
                   )}
                 />
               )}
+              
             </RowField>
             <RowField>
-              <Button buttonColor="cancel" variant="base" isLoading={false}>
+              <Button buttonColor="outline" variant="base" isLoading={false}>
                 Cancelar
               </Button>
 
