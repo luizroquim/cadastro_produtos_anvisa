@@ -2,24 +2,21 @@ import styled from "styled-components";
 
 
 export const ContentDash = styled.div`
-display:flex;
-flex-direction:column;
- background-color: ${({ theme }) => theme.colors.gray_400};
- width:100%;
- max-width:90%;
- height:auto;
+  display: flex;
+  flex-direction: column;
+  background-color: ${({ theme }) => theme.colors.gray_400};
+  width: 100%;
+  max-width: 90%;
+  height: auto;
 
- 
- 
- padding:32px;
- gap:20px;
+  padding: 32px;
+  gap: 20px;
 `;
 
 export const Header = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  
 `;
 
 export const TitleGroup = styled.div`
@@ -27,8 +24,6 @@ export const TitleGroup = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  
-  
 
   h1 {
     font: ${({ theme }) => theme.font.openSans.x_big_700};
@@ -42,24 +37,66 @@ export const TitleGroup = styled.div`
 `;
 
 export const Actions = styled.div`
-  
-  
   display: flex;
-  align-items:center;
+  align-items: center;
   gap: 8px;
-
-  
 
 `;
 
 export const ToolBar = styled.div`
-background-color:${({theme})=> theme.colors.gray_600};
+  display: flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px;
+  gap:20px;
+  
+  background-color: ${({ theme }) => theme.colors.gray_500};
+  border-radius:8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+`;
 
+export const ToolBarLeft = styled.div`
+  display: flex;
+  align-items: center;
+  flex:1;
+  gap:16px;
+  
+`;
+
+export const SearchWrapper = styled.search`
+ display:flex;
+ align-items:center;
+ gap:16px;
+ padding: 0 16px;
+ flex:1;
+ width: 100%;
+ max-width:450px;
+ height:48px;
+ border-radius:8px;
+
+
+background-color: #FFFFFF;
+border: 1px solid ${({ theme }) => theme.colors.gray_300};
+ input{
+  height:100%;
+  flex:1;
+  border:none;
+  outline:none;
+  font:${({theme})=> theme.font.openSans.regular_400};
+  color: ${({ theme }) => theme.colors.gray_100};
+    
+    &::placeholder {
+      color: ${({ theme }) => theme.colors.gray_200};
+    }
+  }
+  
+`;
+
+export const ToolBarRight = styled.div`
+  
 `
+
+
 export const TableContainer = styled.div`
-background-color:${({theme})=> theme.colors.gray_600};
-
-`
-
-
-
+  background-color: ${({ theme }) => theme.colors.gray_600};
+`;
