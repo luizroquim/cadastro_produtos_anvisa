@@ -30,9 +30,9 @@ const variantColor = {
   `,
   outline: css`
     background-color: ${({ theme }) => theme.colors.gray_500};
-    border: 1px solid ${({ theme }) => theme.colors.gray_300};
+    border: 2px solid ${({ theme }) => theme.colors.gray_300};
     &:hover {
-      background-color: ${({ theme }) => theme.colors.gray_400};
+      border: 2px solid ${({ theme }) => theme.colors.green_100};
     }
   `,
 };
