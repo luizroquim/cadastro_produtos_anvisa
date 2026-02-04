@@ -3,7 +3,6 @@ import { InputField } from "../../components/Reuse/InputField";
 import { Overlay, Content, Form, FormData, RowField } from "./styles";
 import { Select } from "../../components/Reuse/Select";
 import { Button } from "../../components/Reuse/Button";
-
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -66,6 +65,7 @@ export function NewProduct({onClose}:NewProductProps) {
         <TitleContainer
           title="Cadastre um novo produto"
           subtitle="Preencha os campos para adicionar um item ao catálogo"
+          
         />
 
         <Form onSubmit={handleSubmit(onSubmit)}>

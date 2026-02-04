@@ -33,7 +33,8 @@ export function Dashboard() {
       <ContentDash>
         <Header>
           <TitleGroup>
-            <h1>Produtos</h1>
+           
+            <h1 >  Gestão de produtos regulamentados</h1>
             <span>Visualize, filtre e gerencie os produtos cadastrados</span>
           </TitleGroup>
           <Actions>
