@@ -1,7 +1,6 @@
-import { Container } from "../NewProduct/styles";
+import { Container } from "./styles";
 import { Button} from "../../components/Reuse/Button";
 import { Plus, Download,Search,ArrowUpDownIcon } from "lucide-react";
-
 import {
   Header,
   TitleGroup,
@@ -14,13 +13,28 @@ import {
   SearchWrapper,
 } from "./styles";
 
+import {useState} from "react";
+import { NewProduct } from "../NewProduct";
+
 export function Dashboard() {
+
+  const[isNewProductModalOpen,setIsNewProductModalOpen] = useState(false)
+
+  function handleOpenModal(){
+    setIsNewProductModalOpen(true);
+  }
+
+  function handleCloseModal(){
+    setIsNewProductModalOpen(false);
+  }
+  
   return (
     <Container>
       <ContentDash>
         <Header>
           <TitleGroup>
-            <h1>Produtos</h1>
+           
+            <h1 >  Gestão de produtos regulamentados</h1>
             <span>Visualize, filtre e gerencie os produtos cadastrados</span>
           </TitleGroup>
           <Actions>
@@ -28,7 +42,7 @@ export function Dashboard() {
               <Download size={18} strokeWidth={2.5} />
               Exportar lista
             </Button>
-            <Button>
+            <Button onClick={handleOpenModal}>
               <Plus size={18} strokeWidth={2.5} />
               Cadastrar novo produto
             </Button>
@@ -54,6 +68,9 @@ export function Dashboard() {
         </ToolBar>
         <TableContainer>Tabela</TableContainer>
       </ContentDash>
+      {isNewProductModalOpen &&(
+        <NewProduct onClose={handleCloseModal}/>
+      )}
     </Container>
   );
 }
