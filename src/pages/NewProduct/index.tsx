@@ -1,6 +1,6 @@
 import { TitleContainer } from "../../components/TitleContainer";
 import { InputField } from "../../components/Reuse/InputField";
-import { Container, Content, Form, FormData, RowField } from "./styles";
+import { Overlay, Content, Form, FormData, RowField } from "./styles";
 import { Select } from "../../components/Reuse/Select";
 import { Button } from "../../components/Reuse/Button";
 
@@ -8,7 +8,9 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-
+interface NewProductProps{
+  onClose:() => void;
+}
 type FormDataProps = {
   productName: string;
   technicalName: string;
@@ -34,7 +36,7 @@ const schema:yup.ObjectSchema<FormDataProps> = yup.object({
 });
 
 
-export function NewProduct() {
+export function NewProduct({onClose}:NewProductProps) {
   const {
     control,
     handleSubmit,
@@ -59,7 +61,7 @@ export function NewProduct() {
   }
 
   return (
-    <Container>
+    <Overlay>
       <Content>
         <TitleContainer
           title="Cadastre um novo produto"
@@ -169,7 +171,7 @@ export function NewProduct() {
               
             </RowField>
             <RowField>
-              <Button buttonColor="outline" variant="base" isLoading={false}>
+              <Button buttonColor="outline" variant="base" isLoading={false} onClick={onClose}>
                 Cancelar
               </Button>
 
@@ -185,6 +187,6 @@ export function NewProduct() {
           </FormData>
         </Form>
       </Content>
-    </Container>
+    </Overlay>
   );
 }
