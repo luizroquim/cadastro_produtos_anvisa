@@ -1,6 +1,6 @@
 import { Container } from "../NewProduct/styles";
 import { Button} from "../../components/Reuse/Button";
-import { Plus, Download,Search,FunnelIcon,SlidersHorizontalIcon,Shield,ArrowUpDownIcon } from "lucide-react";
+import { Plus, Download,Search,ArrowUpDownIcon } from "lucide-react";
 
 import {
   Header,
@@ -43,15 +43,13 @@ export function Dashboard() {
               <input type="text" placeholder="Buscar por nome, registro ou classe..." />
               
             </SearchWrapper>
-            <Button buttonColor="outline"><FunnelIcon size={18} strokeWidth={2.5} />Filtros</Button>
-            <Button buttonColor="outline"><SlidersHorizontalIcon size={18} strokeWidth={2.5}/>Status</Button>
-            <Button buttonColor="outline"><Shield size={18} strokeWidth={2.5}/>Classe de Risco</Button>
+          
             
           </ToolBarLeft>
 
           <ToolBarRight>
 
-            <Button buttonColor="outline"><ArrowUpDownIcon size={18} strokeWidth={2.5}/>Ordenar</Button>
+            <Button buttonColor="ghost"><ArrowUpDownIcon size={18} strokeWidth={2.5}/>Ordenar</Button>
           </ToolBarRight>
         </ToolBar>
         <TableContainer>Tabela</TableContainer>

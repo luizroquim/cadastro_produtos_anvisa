@@ -73,10 +73,9 @@ export const SearchWrapper = styled.search`
  max-width:450px;
  height:48px;
  border-radius:8px;
-
-
 background-color: #FFFFFF;
 border: 1px solid ${({ theme }) => theme.colors.gray_300};
+ 
  input{
   height:100%;
   flex:1;
@@ -87,6 +86,10 @@ border: 1px solid ${({ theme }) => theme.colors.gray_300};
     
     &::placeholder {
       color: ${({ theme }) => theme.colors.gray_200};
+    }
+
+    &:focus{
+
     }
   }
   

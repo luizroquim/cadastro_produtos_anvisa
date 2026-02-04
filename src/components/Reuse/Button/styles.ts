@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 type ContainerProps = {
-  $buttonColor: "primary" | "outline";
+  $buttonColor: "primary" | "outline"|"ghost";
   $variant: "base" | "icon" | "iconSmall";
   $isLoading?: boolean;
 };
@@ -30,11 +30,19 @@ const variantColor = {
   `,
   outline: css`
     background-color: ${({ theme }) => theme.colors.gray_500};
-    border: 2px solid ${({ theme }) => theme.colors.gray_300};
+    border: 1px solid ${({ theme }) => theme.colors.gray_300};
     &:hover {
-      border: 2px solid ${({ theme }) => theme.colors.green_100};
+      border: 1px solid ${({ theme }) => theme.colors.green_200};
+      color:${({theme})=> theme.colors.green_200};
     }
   `,
+
+  ghost:css`
+  border:none;
+  &:hover{
+    color:${({theme})=> theme.colors.green_200};
+  }
+  `
 };
 
 export const ButtonContainer = styled.button<ContainerProps>`
