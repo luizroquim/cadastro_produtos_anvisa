@@ -10,8 +10,11 @@ export const colors = {
   gray_500: "#f9fbfA",
   gray_600: "#F8F9FA",
   gray_800:  "#111827",
+
+  gray_light:"#f6f6f6ef",
   green_100: "#1f8459",
   green_200: "#2CB178",
+  
 
   semantic_error:"#e64040",
   semantic_error_focus:"#be0303"

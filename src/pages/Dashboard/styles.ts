@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
 
   width: 100vw;
   min-height: 100vh;
@@ -16,16 +16,18 @@ export const ContentDash = styled.div`
   background-color: ${({ theme }) => theme.colors.gray_400};
   width: 100%;
   max-width: 90%;
+  
   height: auto;
 
   padding: 32px;
-  gap: 20px;
+  gap: 24px;
 `;
 
 export const Header = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  width:100%;
 `;
 
 export const TitleGroup = styled.div`
@@ -70,7 +72,7 @@ export const ToolBarLeft = styled.div`
   gap: 16px;
 `;
 
-export const SearchWrapper = styled.search`
+export const SearchWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
@@ -95,13 +97,88 @@ export const SearchWrapper = styled.search`
       color: ${({ theme }) => theme.colors.gray_200};
     }
 
-    &:focus {
-    }
+   
   }
 `;
 
 export const ToolBarRight = styled.div``;
 
 export const TableContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.gray_600};
+
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  
+  table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+  }
+  
+  th {
+    padding: 16px;
+    text-align: left;
+    background-color: ${({ theme }) => theme.colors.gray_500};
+    font: ${({ theme }) => theme.font.openSans.small_600};
+    border-bottom: 2px solid ${({ theme }) => theme.colors.gray_300};
+
+    &:last-child {
+      text-align: center; 
+      width: 150px; 
+    }
+
+    
+  }
+  tbody {
+    tr {
+      background-color: ${({ theme }) => theme.colors.background};
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: ${({ theme }) => theme.colors.gray_light};
+      }
+    }
+    td {
+      text-align: left;
+      padding: 0px 16px 0px 16px;
+      border-bottom: 2px solid ${({ theme }) => theme.colors.gray_300};
+      font: ${({ theme }) => theme.font.openSans.small_600};
+      color: ${({ theme }) => theme.colors.gray_200};
+
+  
+  } 
+
+      .product-info {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+
+      
+
+      strong {
+        font: ${({ theme }) => theme.font.openSans.small_600};
+        color: ${({ theme }) => theme.colors.gray_100};
+      }
+
+      small {
+        font: ${({ theme }) => theme.font.openSans.small_400};
+        color: ${({ theme }) => theme.colors.gray_200};
+        line-height: 1;
+      }
+ 
+    }
+
+      div {
+        display:flex;
+        justify-content:flex-end;
+      
+        
+      }
+
+      
+      
+    
+  
 `;
