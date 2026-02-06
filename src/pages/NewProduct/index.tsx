@@ -9,7 +9,9 @@ import * as yup from "yup";
 
 interface NewProductProps{
   onClose:() => void;
+  onSave:(data: FormDataProps) => void;
 }
+
 type FormDataProps = {
   productName: string;
   technicalName: string;
@@ -35,14 +37,14 @@ const schema:yup.ObjectSchema<FormDataProps> = yup.object({
 });
 
 
-export function NewProduct({onClose}:NewProductProps) {
+export function NewProduct({onClose, onSave}:NewProductProps) {
   const {
     control,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<FormDataProps>({
-    defaultValues: {
+      defaultValues: {
       productName: "",
       technicalName: "",
       anvisaRegister: "",
@@ -56,7 +58,8 @@ export function NewProduct({onClose}:NewProductProps) {
   const selectedStatus = watch("status");
 
   function onSubmit(data: FormDataProps) {
-    console.log(data);
+    onSave(data);
+    onClose();
   }
 
   return (
@@ -171,7 +174,7 @@ export function NewProduct({onClose}:NewProductProps) {
               
             </RowField>
             <RowField>
-              <Button buttonColor="outline" variant="base" isLoading={false} onClick={onClose}>
+              <Button type="button" buttonColor="outline" variant="base" isLoading={false} onClick={onClose}>
                 Cancelar
               </Button>
 

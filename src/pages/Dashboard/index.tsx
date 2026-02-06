@@ -23,25 +23,16 @@ import {
 
 import { useState } from "react";
 import { NewProduct } from "../NewProduct";
+import { useProducts } from "../../hooks/useProducts";
 
 export function Dashboard() {
   const [isNewProductModalOpen, setIsNewProductModalOpen] = useState(false);
-  const [products, setProducts] = useState([
-    {
-      id: "1",
-      productName: "Luva descartável estéril",
-      technicalName: "Luvas descartáveis",
-      anvisaRegister: "10330660003",
-      riskClass: "Classe I - Baixo Risco",
-      status: "Vigente",
-    },
-  ]);
+ 
+  const{products,deleteProduct,addProduct} = useProducts();
 
   //Funções
 
-  function handleOpenModal() {
-    setIsNewProductModalOpen(true);
-  }
+ 
 
   function handleCloseModal() {
     setIsNewProductModalOpen(false);
@@ -60,7 +51,7 @@ export function Dashboard() {
               <Download size={18} strokeWidth={2.5} />
               Exportar lista
             </Button>
-            <Button onClick={handleOpenModal}>
+            <Button onClick={() => setIsNewProductModalOpen(true)}>
               <Plus size={18} strokeWidth={2.5} />
               Cadastrar novo produto
             </Button>
@@ -111,21 +102,19 @@ export function Dashboard() {
                   <td>{product.status}</td>
                   <td>
                     <div>
-                      <Button buttonColor="ghost" title="Editar">
+                      <Button buttonColor="ghost"  variant="iconSmall" title="Editar">
                         <SquarePenIcon size={18} strokeWidth={2.5} />
                       </Button>
                       <Button
                         buttonColor="ghost"
+                        variant="iconSmall"
                         title="Excluir"
-                        onClick={() =>
-                          setProducts(
-                            products.filter((p) => p.id !== product.id),
-                          )
-                        }
+                        
+                        onClick={()=> deleteProduct(product.id)}
                       >
                         <Trash2Icon size={18} strokeWidth={2.5} />
                       </Button>
-                      <Button buttonColor="ghost" title="Desativar">
+                      <Button buttonColor="ghost" variant="iconSmall" title="Desativar">
                         <CircleX size={18} strokeWidth={2.5} />
                       </Button>
                     </div>
@@ -136,7 +125,7 @@ export function Dashboard() {
           </table>
         </TableContainer>
       </ContentDash>
-      {isNewProductModalOpen && <NewProduct onClose={handleCloseModal} />}
+      {isNewProductModalOpen && <NewProduct onClose={handleCloseModal} onSave={addProduct} />}
     </Container>
   );
 }

@@ -13,10 +13,10 @@ export const Container = styled.div`
 export const ContentDash = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.colors.gray_400};
+  background-color: ${({ theme }) => theme.colors.background};
   width: 100%;
-  max-width: 90%;
-  
+  max-width: 80%;
+  border-radius: 8px;
   height: auto;
 
   padding: 32px;
@@ -57,7 +57,7 @@ export const ToolBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
+  padding: 12px;
   gap: 20px;
 
   background-color: ${({ theme }) => theme.colors.gray_500};
@@ -80,7 +80,7 @@ export const SearchWrapper = styled.div`
   flex: 1;
   width: 100%;
   max-width: 450px;
-  height: 48px;
+  height: 42px;
   border-radius: 8px;
   background-color: #ffffff;
   border: 1px solid ${({ theme }) => theme.colors.gray_300};
@@ -108,6 +108,7 @@ export const TableContainer = styled.div`
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   
   table {
     width: 100%;
@@ -124,7 +125,7 @@ export const TableContainer = styled.div`
 
     &:last-child {
       text-align: center; 
-      width: 150px; 
+      width: 100px; 
     }
 
     
@@ -140,7 +141,7 @@ export const TableContainer = styled.div`
     }
     td {
       text-align: left;
-      padding: 0px 16px 0px 16px;
+      padding: 12px 16px 12px 16px;
       border-bottom: 2px solid ${({ theme }) => theme.colors.gray_300};
       font: ${({ theme }) => theme.font.openSans.small_600};
       color: ${({ theme }) => theme.colors.gray_200};
