@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 type ContainerProps = {
-  $buttonColor: "primary" | "outline"|"ghost";
+  $buttonColor: "primary" | "outline" | "ghost";
   $variant: "base" | "icon" | "iconSmall";
   $isLoading?: boolean;
 };
@@ -9,12 +9,15 @@ type ContainerProps = {
 const variantStyles = {
   base: css`
     height: 48px;
+    padding: 0 24px;
   `,
   icon: css`
+    padding: 0px;
     height: 48px;
     width: 48px;
   `,
   iconSmall: css`
+    padding: 0px;
     height: 32px;
     width: 32px;
   `,
@@ -23,7 +26,7 @@ const variantStyles = {
 const variantColor = {
   primary: css`
     background-color: ${({ theme }) => theme.colors.green_100};
-    
+
     color: #ffff;
     &:hover {
       background-color: ${({ theme }) => theme.colors.green_200};
@@ -34,16 +37,16 @@ const variantColor = {
     border: 1px solid ${({ theme }) => theme.colors.gray_300};
     &:hover {
       border: 1px solid ${({ theme }) => theme.colors.green_200};
-      color:${({theme})=> theme.colors.green_200};
+      color: ${({ theme }) => theme.colors.green_200};
     }
   `,
 
-  ghost:css`
-  border:none;
-  &:hover{
-    color:${({theme})=> theme.colors.green_200};
-  }
-  `
+  ghost: css`
+    border: none;
+    &:hover {
+      color: ${({ theme }) => theme.colors.green_200};
+    }
+  `,
 };
 
 export const ButtonContainer = styled.button<ContainerProps>`
@@ -52,15 +55,12 @@ export const ButtonContainer = styled.button<ContainerProps>`
   justify-content: center;
   font: ${({ theme }) => theme.font.openSans.small_600};
   border-radius: 8px;
-  gap:8px;
+  gap: 8px;
   border: none;
   cursor: pointer;
-  white-space:nowrap;
-  padding:24px;
+  white-space: nowrap;
+  padding: 24px;
   transition: all 0.2s linear;
-
- 
- 
 
   &:disabled {
     opacity: 0.5;
@@ -74,6 +74,4 @@ export const ButtonContainer = styled.button<ContainerProps>`
     css`
       cursor: progress;
     `}
-
- 
 `;
