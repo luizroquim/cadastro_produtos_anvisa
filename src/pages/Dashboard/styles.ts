@@ -109,7 +109,7 @@ export const TableContainer = styled.div`
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  margin-top: 24px; /* Adicione um espaçamento se necessário */
+  
   background-color: ${({ theme }) => theme.colors.background};
  
 `;
