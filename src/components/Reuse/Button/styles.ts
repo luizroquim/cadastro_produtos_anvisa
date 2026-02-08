@@ -27,7 +27,7 @@ const variantColor = {
   primary: css`
     background-color: ${({ theme }) => theme.colors.green_100};
 
-    color: #ffff;
+    color: #FFFF;
     &:hover {
       background-color: ${({ theme }) => theme.colors.green_200};
     }

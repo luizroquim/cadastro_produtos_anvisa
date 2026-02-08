@@ -1,4 +1,4 @@
-import { TitleContainer } from "../../components/TitleContainer";
+import { TitleContainer } from "../../components/Reuse/TitleContainer";
 import { InputField } from "../../components/Reuse/InputField";
 import { Overlay, Content, Form, FormData, RowField } from "./styles";
 import { Select } from "../../components/Reuse/Select";
@@ -6,10 +6,13 @@ import { Button } from "../../components/Reuse/Button";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import type { Product } from "../../hooks/useProducts";
 
 interface NewProductProps{
   onClose:() => void;
   onSave:(data: FormDataProps) => void;
+  initialData?:Product;
+  
 }
 
 type FormDataProps = {
@@ -19,6 +22,8 @@ type FormDataProps = {
   riskClass: string;
   status: string;
   date?: string;
+  isActive?:boolean
+  
 };
 
 const schema:yup.ObjectSchema<FormDataProps> = yup.object({
@@ -34,10 +39,14 @@ const schema:yup.ObjectSchema<FormDataProps> = yup.object({
       is: "Data de vencimento",
       then: (schema) => schema.required("Data de vencimento é obrigatória."),
     }),
+    isActive:yup.boolean(),
+  
 });
 
 
-export function NewProduct({onClose, onSave}:NewProductProps) {
+export function NewProduct({onClose, onSave,initialData}:NewProductProps) {
+ //isEditing será true se existir initialData, senão false
+  const isEditing = !!initialData
   const {
     control,
     handleSubmit,
@@ -45,12 +54,12 @@ export function NewProduct({onClose, onSave}:NewProductProps) {
     formState: { errors },
   } = useForm<FormDataProps>({
       defaultValues: {
-      productName: "",
-      technicalName: "",
-      anvisaRegister: "",
-      riskClass: "",
-      status: "",
-      date: "",
+      productName: initialData?.productName || "",
+      technicalName: initialData?.technicalName ||"",
+      anvisaRegister:initialData?.anvisaRegister || "",
+      riskClass:initialData?.riskClass || "",
+      status: initialData?.status||"",
+      date:initialData?.date || "",
     },
     resolver: yupResolver(schema),
   });
@@ -58,7 +67,11 @@ export function NewProduct({onClose, onSave}:NewProductProps) {
   const selectedStatus = watch("status");
 
   function onSubmit(data: FormDataProps) {
-    onSave(data);
+    const productData = {
+      ...data,
+      isActive:true,
+    }
+    onSave(productData);
     onClose();
   }
 
@@ -66,8 +79,8 @@ export function NewProduct({onClose, onSave}:NewProductProps) {
     <Overlay>
       <Content>
         <TitleContainer
-          title="Cadastre um novo produto"
-          subtitle="Preencha os campos para adicionar um item ao catálogo"
+          title={isEditing?"Editar produto":"Cadastre um novo produto"}
+          subtitle={isEditing?"Atualize as informações do produto":"Preencha os campos para adicionar um item ao catálogo"}
           
         />
 
@@ -184,7 +197,7 @@ export function NewProduct({onClose, onSave}:NewProductProps) {
                 variant="base"
                 isLoading={false}
               >
-                Cadastrar
+                {isEditing ? "Salvar Alterações":"Cadastrar"}
               </Button>
             </RowField>
           </FormData>

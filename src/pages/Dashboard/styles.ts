@@ -109,77 +109,7 @@ export const TableContainer = styled.div`
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  
-  table {
-    width: 100%;
-    table-layout: auto;
-    border-collapse: collapse;
-  }
-  
-  th {
-    padding: 16px;
-    text-align: left;
-    background-color: ${({ theme }) => theme.colors.gray_500};
-    font: ${({ theme }) => theme.font.openSans.small_600};
-    border-bottom: 2px solid ${({ theme }) => theme.colors.gray_300};
-
-    &:last-child {
-      text-align: center; 
-      width: 100px; 
-    }
-
-    
-  }
-  tbody {
-    tr {
-      background-color: ${({ theme }) => theme.colors.background};
-      transition: background-color 0.2s;
-
-      &:hover {
-        background-color: ${({ theme }) => theme.colors.gray_light};
-      }
-    }
-    td {
-      text-align: left;
-      padding: 12px 16px 12px 16px;
-      border-bottom: 2px solid ${({ theme }) => theme.colors.gray_300};
-      font: ${({ theme }) => theme.font.openSans.small_600};
-      color: ${({ theme }) => theme.colors.gray_200};
-
-  
-  } 
-
-      .product-info {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-      }
-
-      
-
-      strong {
-        font: ${({ theme }) => theme.font.openSans.small_600};
-        color: ${({ theme }) => theme.colors.gray_100};
-      }
-
-      small {
-        font: ${({ theme }) => theme.font.openSans.small_400};
-        color: ${({ theme }) => theme.colors.gray_200};
-        line-height: 1;
-      }
+  margin-top: 24px; /* Adicione um espaçamento se necessário */
+  background-color: ${({ theme }) => theme.colors.background};
  
-    }
-
-      div {
-        display:flex;
-        justify-content:flex-end;
-      
-        
-      }
-
-      
-      
-    
-  
 `;
