@@ -1,15 +1,13 @@
-import { Container } from "./styles";
-import { Button } from "../../components/Reuse/Button";
+import { useCallback, useState } from "react";
+import type { Product } from "../../hooks/useProducts";
+
+
+//Ícones
+import { Plus, Download, Search, ArrowUpDownIcon } from "lucide-react";
+
+//Estilos
 import {
-  Plus,
-  Download,
-  Search,
-  ArrowUpDownIcon,
-  SquarePenIcon,
-  Trash2Icon,
-  CircleX,
-} from "lucide-react";
-import {
+  Container,
   Header,
   TitleGroup,
   Actions,
@@ -21,22 +19,101 @@ import {
   SearchWrapper,
 } from "./styles";
 
-import { useState } from "react";
+//Componentes
+import { Button } from "../../components/Reuse/Button";
 import { NewProduct } from "../NewProduct";
+import { ProductTable } from "../../components/ProductTable";
+
+
+//Hooks
 import { useProducts } from "../../hooks/useProducts";
+import { useProductsFilters } from "../../hooks/useProductsFilters";
+import { useModal } from "../../hooks/useModal";
+import { ConfirmModal } from "../../components/ConfirmModal";
 
 export function Dashboard() {
-  const [isNewProductModalOpen, setIsNewProductModalOpen] = useState(false);
- 
-  const{products,deleteProduct,addProduct} = useProducts();
+  const [editingProductId, setEditingProductId] = useState<string | null>(null);
+  const [productToDelete, setProductToDelete] = useState<Product | null>(null);
+  const [productToToggle, setProductToToggle] = useState<Product | null>(null);
+  useState<Product | null>(null);
+
+  const {
+    products,
+    deleteProduct,
+    addProduct,
+    updateProduct,
+    toggleProductActivation,
+  } = useProducts();
+  const { searchTerm, setSearchTerm, filteredProducts } =
+    useProductsFilters(products);
+
+  const newProductModal = useModal();
+  const deleteModal = useModal();
+  const toggleActivationModal = useModal();
 
   //Funções
 
- 
+  const handleRequestDelete = useCallback(
+    (product: Product) => {
+      setProductToDelete(product);
+      deleteModal.open();
+    },
+    [deleteModal],
+  );
 
-  function handleCloseModal() {
-    setIsNewProductModalOpen(false);
-  }
+  const handleConfirmDelete = useCallback(() => {
+    if (productToDelete) {
+      deleteProduct(productToDelete.id);
+      setProductToDelete(null);
+      deleteModal.close();
+    }
+  }, [productToDelete, deleteProduct, deleteModal]);
+
+  const handleRequestToggleActivation = useCallback(
+    (product: Product) => {
+      setProductToToggle(product);
+      toggleActivationModal.open();
+    },
+    [toggleActivationModal],
+  );
+
+  const handleConfirmToggleActivation = useCallback(() => {
+    if (productToToggle) {
+      toggleProductActivation(productToToggle.id);
+      setProductToToggle(null);
+      toggleActivationModal.close();
+    }
+  }, [productToToggle, toggleProductActivation, toggleActivationModal]);
+
+  const handleOpenNewProductModal = useCallback(() => {
+    setEditingProductId(null);
+    newProductModal.open();
+  }, [newProductModal]);
+
+  const handleSaveProduct = useCallback(
+    (productData: Omit<Product, "id">) => {
+      if (editingProductId) {
+        updateProduct(editingProductId, productData);
+      } else {
+        addProduct(productData);
+      }
+      setEditingProductId(null);
+      newProductModal.close();
+    },
+    [editingProductId, updateProduct, addProduct, newProductModal],
+  );
+
+  const handleEditProduct = useCallback(
+    (id: string) => {
+      setEditingProductId(id);
+      newProductModal.open();
+    },
+    [newProductModal],
+  );
+
+  const editingProduct = editingProductId
+    ? products.find((product) => product.id === editingProductId)
+    : undefined;
 
   return (
     <Container>
@@ -51,7 +128,7 @@ export function Dashboard() {
               <Download size={18} strokeWidth={2.5} />
               Exportar lista
             </Button>
-            <Button onClick={() => setIsNewProductModalOpen(true)}>
+            <Button onClick={handleOpenNewProductModal}>
               <Plus size={18} strokeWidth={2.5} />
               Cadastrar novo produto
             </Button>
@@ -65,6 +142,8 @@ export function Dashboard() {
               <input
                 type="text"
                 placeholder="Buscar por nome, registro ou classe..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
             </SearchWrapper>
           </ToolBarLeft>
@@ -77,55 +156,49 @@ export function Dashboard() {
           </ToolBarRight>
         </ToolBar>
         <TableContainer>
-          <table>
-            <thead>
-              <tr>
-                <th>Nome/Nome Técnico</th>
-                <th>Registro</th>
-                <th>Classe de Risco</th>
-                <th>Status</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {products.map((product) => (
-                <tr key={product.id}>
-                  <td>
-                    <div className="product-info">
-                      <strong>{product.productName}</strong>
-                      <small>{product.technicalName}</small>
-                    </div>
-                  </td>
-                  <td>{product.anvisaRegister}</td>
-                  <td>{product.riskClass}</td>
-                  <td>{product.status}</td>
-                  <td>
-                    <div>
-                      <Button buttonColor="ghost"  variant="iconSmall" title="Editar">
-                        <SquarePenIcon size={18} strokeWidth={2.5} />
-                      </Button>
-                      <Button
-                        buttonColor="ghost"
-                        variant="iconSmall"
-                        title="Excluir"
-                        
-                        onClick={()=> deleteProduct(product.id)}
-                      >
-                        <Trash2Icon size={18} strokeWidth={2.5} />
-                      </Button>
-                      <Button buttonColor="ghost" variant="iconSmall" title="Desativar">
-                        <CircleX size={18} strokeWidth={2.5} />
-                      </Button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <ProductTable 
+          products={filteredProducts}
+          searchTerm={searchTerm}
+          onEdit={handleEditProduct}
+          onDelete={handleRequestDelete}
+          onDeactivate={handleRequestToggleActivation}
+          />
         </TableContainer>
       </ContentDash>
-      {isNewProductModalOpen && <NewProduct onClose={handleCloseModal} onSave={addProduct} />}
+
+      {deleteModal.isOpen && (
+        <ConfirmModal
+          title={`Excluir ${productToDelete?.productName}`}
+          message="Você tem certeza? Esta ação removerá o registro permanentemente."
+          onClose={deleteModal.close}
+          onConfirm={handleConfirmDelete}
+        />
+      )}
+
+      {toggleActivationModal.isOpen && (
+        <ConfirmModal
+          title={
+            productToToggle?.isActive
+              ? `Desativar ${productToToggle?.productName}`
+              : `Reativar ${productToToggle?.productName}`
+          }
+          message={
+            productToToggle?.isActive
+              ? "O produto será marcado como inativo e ficará visualmente diferente na lista."
+              : "O produto voltará ao estado ativo normal."
+          }
+          onClose={toggleActivationModal.close}
+          onConfirm={handleConfirmToggleActivation}
+        />
+      )}
+
+      {newProductModal.isOpen && (
+        <NewProduct
+          onClose={newProductModal.close}
+          onSave={handleSaveProduct}
+          initialData={editingProduct}
+        />
+      )}
     </Container>
   );
 }
